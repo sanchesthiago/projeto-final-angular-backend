@@ -38,7 +38,7 @@ export class UsersService{
             return messageObject("Usuário não encontrado!")
         }
         await UserRepository.update (id, user);
-        return messageObject("Usuário incluido com sucesso")
+        return messageObject("Usuário Atualizado com sucesso")
     }
 
     authenticate (email: string, password: string){

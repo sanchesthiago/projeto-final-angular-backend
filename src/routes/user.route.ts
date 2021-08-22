@@ -27,7 +27,7 @@ routes.delete('/remove',async (req: Request, res: Response) =>{
         return res.status(400).send(messageObject("Id do estudante é obrigatório!" ));
     }
     const users = await usersService.removeUser(userId);
-    res.send(users);
+    res.status(201).send(users);
     return 
 });
 
@@ -37,17 +37,17 @@ routes.put('/update', async( req:Request, res:Response)=>{
         return res.status(400).send(messageObject("Usuário não encontrado!"));
     }
     const userReturn = await usersService.updateUser(user.id, user);
-    res.send(userReturn);
+    res.status(201).send(userReturn);
 });
 
 routes.get('/details/:id', async( req: Request, res:Response)=>{
     const id = req.params.id;
     const user = await usersService.getUserById(Number(id));
     if(!user) {
-        return res.status(409).send("Estudante não encontrado!");
+        return res.status(400).send("Estudante não encontrado!");
     }
     
-    res.send(user);
+    res.status(201).send(user);
 });
 
 routes.post('/autenticate', async (req: Request, res:Response)=>{
@@ -56,7 +56,7 @@ routes.post('/autenticate', async (req: Request, res:Response)=>{
     if(!user) {
         return res.status(404).send(messageObject("Usuário não encontrado!"));
     }
-    res.send(user);
+    res.status(201).send(user);
 });
 
 // routes.get('/',(req:Request, res:Response)=>{
